@@ -1,4 +1,5 @@
 import math
+import re
 print("a b tol dec")
 a,b,tol,dec = [eval(x) for x in input().split()]
 def f(x):
