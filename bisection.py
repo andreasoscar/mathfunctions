@@ -3,8 +3,7 @@ from math import sin,cos,tan
 print("a b tol dec")
 a,b,tol,dec = [eval(x) for x in input().split()]
 expr = input("function(:x): ")
-def f(y):
-    x = y
+def f(x):
     return eval(expr)
 if f(a)*f(b) >= 0:
     print("unable to evaluate")
