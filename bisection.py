@@ -1,9 +1,11 @@
-import math
-import re
+
+from math import sin,cos,tan
 print("a b tol dec")
 a,b,tol,dec = [eval(x) for x in input().split()]
-def f(x):
-    return math.cos(x)**2 + 6 - x
+expr = input("function(:x): ")
+def f(y):
+    x = y
+    return eval(expr)
 if f(a)*f(b) >= 0:
     print("unable to evaluate")
 else:
@@ -15,4 +17,4 @@ else:
             b = c
         else:
             a = c
-print(("{:." + str(dec) + "f}").format((a+b)/2))
+    print(("{:." + str(dec) + "f}").format((a+b)/2))
