@@ -1,5 +1,5 @@
 
-from math import sin,cos,tan,atan,asin,acos
+from math import *
 print("a b tol dec")
 a,b,tol,dec = [eval(x) for x in input().split()]
 expr = input("function(:x): ")
