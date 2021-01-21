@@ -1,7 +1,7 @@
 from math import *
 def fpi(f,g,gprime,x0,tol):
     x = x0
-    if abs(eval(gprime)) > 1:
+    if abs(eval(gprime)) >= 1:
         print("Not a valid guess")
     else:
         while abs(eval(f)) > tol:
