@@ -4,6 +4,7 @@ data = dict()
 p = []
 def fpi(f,g,gprime,x0,tol,step):
     x = x0
+<<<<<<< HEAD
     r = 0.739085133385334
     k = 0
     while abs(r - x) >= tol:
@@ -11,6 +12,12 @@ def fpi(f,g,gprime,x0,tol,step):
             break
         else:
             k += 1
+=======
+    if abs(eval(gprime)) >= 1:
+        print("Not a valid guess")
+    else:
+        while abs(eval(f)) > tol:
+>>>>>>> 068ddc20071adf6062781722e7eaf2b811a62af2
             x = eval(g)
             p.append(abs(r-x))
     print("n" + " = " + str(k))
