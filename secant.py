@@ -12,6 +12,6 @@ def secant(f_new,f_old,x0,x1,tol):
         x = x_new
         p.append(abs(r-x))
     print(x)
-secant("exp(x) + sin(x) - 4", "exp(x_old) + sin(x_old) - 4",1,2,0.000001)
+secant("exp(x) + sin(x) - 4", "exp(x_old) + sin(x_old) - 4",1,1.5,0.000001)
 for i in range(0,len(p)-1):
     print(p[i+1]/p[i])
