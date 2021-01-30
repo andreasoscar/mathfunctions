@@ -1,6 +1,5 @@
 import math
 import numpy as np
-<<<<<<< HEAD
 p = [] #true error array
 x_n = np.matrix([1,2,3]).transpose()
 r = np.matrix([1,1,1]).transpose()
@@ -15,7 +14,6 @@ for i in range(10):
 for i in range(0,len(p)-1):
     print(p[i+1]/p[i])
 print(x_n)
-=======
 #x_1 = x, x_2 = y, x_3 = z
 x,y,z = 1,2,3
 F = np.matrix([[eval("x**2 - 2*x + y**2 - z + 1")],[eval("x*(y**2) - x - 3*y + y*z + 2")],[eval("x*(z**2)-3*z + y*(z**2) + x*y")]])
@@ -26,4 +24,3 @@ for i in range(10):
     x,y,z = x.item(0),x.item(1),x.item(2)
     x = x - np.dot(J_inv,F)
 print(x)
->>>>>>> 5488a2f7cf7cfc65c74396e5deae177dd68bb089
