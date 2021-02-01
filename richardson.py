@@ -9,4 +9,4 @@ for i in range(50):
     x = np.dot(G,x) + C
 print(x)
 v,ve = np.linalg.eig(G)
-print(max(abs(v)))
+print(max(v))
