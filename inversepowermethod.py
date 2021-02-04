@@ -13,7 +13,7 @@ def power(A1,s):
             return (1/n0 + s), n
             break
         x_t = p/n0
-s = -2.33
+s = -1.1
 k = s*np.eye(2)
 inv = np.linalg.inv(A-k)
 print(power(inv,s))
