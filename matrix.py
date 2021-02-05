@@ -14,33 +14,23 @@ def inf(a):
     return sum
 for h in range(6,16):
     n = h
-    x = []
-    for i in range(1,n+1):
-        x.append([1])
-    #print(x)
+    true_vec = [1 for i in range(n)]
     A = []
     for i in range(1,n+1):
         xi = []
         for j in range(1,n+1):
             xi.append(5/(i+2*j-1))
         A.append(xi)
-    #print(n)
-    #H = np.linalg.solve(A,np.dot(A,x))
-    #print("$" + "\\" + "begin{bmatrix}")
-    #for z in range(len(H)):
-    #    print(str(H[z][0]) + " & " + "\\" + "\\ ",end='')
-    #print("\end{bmatrix}$")
-    #print("\\" + "\\")
+    H = np.linalg.solve(A,list(map(sum,A)))
     v.append(n)
-    t.append(np.linalg.cond(A,np.inf))
-    print(np.linalg.cond(A,np.inf))
-height = t
-bars = v
-y_pos = np.arange(len(bars))
-
-plt.plot(y_pos, height, color = 'blue')
-plt.yscale('symlog')
-plt.xlabel('Matrix Dimensions')
-plt.ylabel('Condition number')
-plt.xticks(y_pos, bars)
+    t.append(math.sqrt(sum(true_vec-H)**2))
+    #print(n)
+    # H = np.linalg.solve(A,np.dot(A,x))
+    # print("$" + "\\" + "begin{bmatrix}")
+    # for z in range(len(H)):
+    #    print(str(H[z][0]) + " & " + "\\" + "\\ ",end='')
+    # print("\end{bmatrix}$")
+    # print("\\" + "\\")
+plt.plot(v,t)
+plt.xticks(np.arange(min(v),max(v)+1,1))
 plt.show()

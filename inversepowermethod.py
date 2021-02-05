@@ -1,19 +1,16 @@
 import numpy as np
-A = np.matrix([[1,2],[2,1]])
-n = 0
-def power(A1,s):
-    x_t = np.matrix([0,1]).transpose()
-    r1 = -1
+import math
+K = np.matrix([[1,2],[2,1]])
+xt = np.matrix([-1,0]).transpose()
+def inv_power(x0,A,r):
+    x_n = x0
     n = 0
     while True:
         n += 1
-        p = A1*x_t
-        n0 = max(abs(p))[0,0]
-        if abs(r1 - (1/n0 + s)) < 10**(-4):
-            return (1/n0 + s), n
+        n0 = x_n/math.sqrt(x_n[0]**2+x_n[1]**2)
+        x_n = np.linalg.solve(A,n0)
+        ginv = n0.transpose().dot(x_n)
+        if abs(ginv - r) < 10**(-4):
+            return ginv, n
             break
-        x_t = p/n0
-s = -1.1
-k = s*np.eye(2)
-inv = np.linalg.inv(A-k)
-print(power(inv,s))
+print(inv_power(xt,K,-1))
