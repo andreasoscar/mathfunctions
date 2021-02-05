@@ -14,23 +14,16 @@ def inf(a):
     return sum
 for h in range(6,16):
     n = h
-    true_vec = [1 for i in range(n)]
     A = []
+    x = np.matrix([1 for i in range(n)]).transpose()
     for i in range(1,n+1):
         xi = []
         for j in range(1,n+1):
             xi.append(5/(i+2*j-1))
         A.append(xi)
-    H = np.linalg.solve(A,list(map(sum,A)))
-    v.append(n)
-    t.append(math.sqrt(sum(true_vec-H)**2))
-    #print(n)
-    # H = np.linalg.solve(A,np.dot(A,x))
-    # print("$" + "\\" + "begin{bmatrix}")
-    # for z in range(len(H)):
-    #    print(str(H[z][0]) + " & " + "\\" + "\\ ",end='')
-    # print("\end{bmatrix}$")
-    # print("\\" + "\\")
-plt.plot(v,t)
-plt.xticks(np.arange(min(v),max(v)+1,1))
-plt.show()
+    b = np.dot(A,x)
+    H = np.linalg.solve(A,b)
+    print(n)
+    for i in H:
+        print(i)
+    print()

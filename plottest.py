@@ -87,14 +87,14 @@ x,y = np.array(new).T
 plt.scatter(x,y)
 x,y = np.array(old).T
 plt.scatter(x,y)
-#plt.scatter(norm1[0],norm1[1],color = 'g')
-#plt.scatter(norm2[0],norm2[1],color = 'r')
-plt.scatter(norminf[0],norminf[1],color='r')
-#for i in norm1dup:
-#    plt.scatter(i[0],i[1],color = 'g')
-# for i in norm2dup:
-#     plt.scatter(i[0],i[1],color = 'r')
-for i in norminfdup:
+plt.scatter(norm1[0],norm1[1],color = 'g')
+plt.scatter(norm2[0],norm2[1],color = 'r')
+plt.scatter(norminf[0],norminf[1],color='c')
+for i in norm1dup:
+   plt.scatter(i[0],i[1],color = 'g')
+for i in norm2dup:
     plt.scatter(i[0],i[1],color = 'r')
+for i in norminfdup:
+    plt.scatter(i[0],i[1],color = 'c')
 
 plt.show()
