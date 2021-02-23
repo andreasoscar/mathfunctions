@@ -1,7 +1,7 @@
 import numpy as np
 import math
 K = np.matrix([[1,2],[2,1]])
-xt = np.matrix([-1,0]).transpose()
+xt = np.matrix([1,0]).transpose()
 def inv_power(x0,A,r):
     x_n = x0
     n = 0
