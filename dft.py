@@ -1,65 +1,68 @@
 import scipy.linalg
 import numpy as np
 import matplotlib.pyplot as plt
+from numpy import array as arr
+import cmath
 import math
-def dftinv(x):
-    #F: inverse fourier matrix
-    F = scipy.linalg.dft(len(x))
-    F = np.linalg.inv(F)
-    y = (math.sqrt(len(x)))*np.dot(F,x)
-    return y
+
 def dft(x):
-    #F: Fourier matrix
-    F = scipy.linalg.dft(len(x))
-    y = (1/math.sqrt(len(x)))*np.dot(F,x)
-    return y
-c,d,n = 0,7/8,8
-P = []
-t_x = []
-for i in range(8):
-    P.append(math.exp(i/8))
-    t_x.append(i/8)
+    N = len(x)
+    S = [0 for _ in range(N)]
+
+    for i in range(N):
+        for j in range(N):
+            tmp = [((0-1j)*(2*np.pi*i*j)) / N]
+            S[i] += x[j] * (1/math.sqrt(N))*np.exp(tmp)
+    return S
+
+def dft_inv(x):
+    S = np.conjugate(arr(dft(x)).T)
+    return S[0].transpose()
+x1 = np.matrix([-1,0,0,0]).transpose()
+x = dft_inv(x1)
+for i in x:
+    print(i)
+
+c,d,n = -1,3,8
+x_j = []
+t_j = []
+for i in np.linspace(c,d,n):
+    x_j.append(math.exp(i))
+    t_j.append(i)
+y_j = dft(x_j)
 def interpolate(t,m):
-    xvalues = np.matrix(P).transpose()
-    y = dft(xvalues)
-    P_t = y[0].item(0).real / math.sqrt(n)
+    P_t = y_j[0].real / math.sqrt(n)
     P_temp = 0
     v = 1
     for k in range(1,m):
         v += 2
-        P_temp += (y[k].item(0).real*math.cos((2*math.pi*k*(t-c))/(d-c))-(y[k].item(0).imag*math.sin((2*math.pi*k*(t-c))/(d-c))))
+        P_temp += (y_j[k].real*math.cos((2*math.pi*k*(t-c))/(d-c))-(y_j[k].imag*math.sin((2*math.pi*k*(t-c))/(d-c))))
     if m != 4:
         v += 1
-        P_temp += (y[m].item(0).real*math.cos((2*math.pi*(m)*(t-c))/(d-c)))
+        P_temp += (y_j[m].real*math.cos((2*math.pi*(m)*(t-c))/(d-c)))
     if m==4:
         v += 1
-        P_t += (P_temp*(2/math.sqrt(n)) + (y[m].item(0).real/math.sqrt(n))*math.cos((n*math.pi*(t-c)/(d-c))))
+        P_t += (P_temp*(2/math.sqrt(n)) + (y_j[m].real/math.sqrt(n))*math.cos((n*math.pi*(t-c)/(d-c))))
     else:
         P_t += (P_temp*(2/math.sqrt(n)))
     #print(v)
     return P_t
-x = np.linspace(0,7/8,1000)
-y = []
-for i in x:
-    tj = c + i*(d-c)
-    y.append(interpolate(tj,4))
-plt.plot(x,y)
-x = []
-y = []
-for i in range(0,8):
-    x.append([i/8])
-    y.append(np.exp(i/8))
-plt.scatter(x,y)
-x = np.linspace(0,7/8,1000)
-y = []
-for i in x:
-    tj = c + i*(d-c)
-    y.append(interpolate(tj,2))
-plt.plot(x,y)
-x = np.linspace(0,7/8,1000)
-y = []
-for i in x:
-    tj = c + i*(d-c)
-    y.append(interpolate(tj,3))
-plt.plot(x,y)
+y1 = []
+y2 = []
+y3 = []
+f1 = []
+f2 = []
+f3 = []
+for i in np.linspace(c,d-((d-c)/n),1000):
+    y1.append(interpolate(i,4))
+    f1.append(abs(math.exp(i) - interpolate(i,4)))
+    y2.append(interpolate(i,2))
+    f2.append(abs(math.exp(i) - interpolate(i,2)))
+    y3.append(interpolate(i,3))
+    f3.append(abs(math.exp(i) - interpolate(i,3)))
+plt.plot(np.linspace(c,d,1000),f1, color='g')
+#plt.plot(np.linspace(c,d,1000),y1)
+plt.plot(np.linspace(c,d,1000),f2, color='r')
+plt.plot(np.linspace(c,d,1000),f3, color='b')
+#plt.scatter(t_j,x_j)
 plt.show()
